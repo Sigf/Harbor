@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://msh5kq077gyc"]
+
+[ext_resource type="Script" uid="uid://dmyg3q3mgk58u" path="res://UI/main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("end_turn_button", "spawn_villager_button", "print_world_stats_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+end_turn_button = NodePath("PanelContainer/VBoxContainer/EndTurnButton")
+spawn_villager_button = NodePath("PanelContainer/VBoxContainer/SpawnVillagerButton")
+print_world_stats_button = NodePath("PanelContainer/VBoxContainer/PrintWorldStatsButton")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="EndTurnButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "End Turn"
+
+[node name="SpawnVillagerButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Spawn Villager"
+
+[node name="PrintWorldStatsButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Print World Stats"

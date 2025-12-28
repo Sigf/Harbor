@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://tvsesooiwopu"]
+
+[ext_resource type="Script" uid="uid://sdb55g18okuj" path="res://Characters/villager_character.gd" id="1_7s0xh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4sx36"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7s0xh"]
+albedo_color = Color(0.30980393, 0.37254903, 1, 1)
+
+[node name="VillagerCharacter" type="Node3D" groups=["Characters"]]
+script = ExtResource("1_7s0xh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0162127, 0)
+mesh = SubResource("CapsuleMesh_4sx36")
+surface_material_override/0 = SubResource("StandardMaterial3D_7s0xh")

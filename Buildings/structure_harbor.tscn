@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4vpaymw4vllc"]
+
+[ext_resource type="Script" uid="uid://ckbpusjbub1fs" path="res://Buildings/structure_harbor.gd" id="1_12lm8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7qbh3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qbh3"]
+albedo_color = Color(0.61960787, 0.38039216, 0.91764706, 1)
+
+[node name="StructureHarbor" type="Node3D" node_paths=PackedStringArray("villager_spawn_location") groups=["Structures"]]
+script = ExtResource("1_12lm8")
+villager_spawn_location = NodePath("NewVillagerSpawnLocation")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10.937828, 0, 0, 0, 2.8065464, 0, 0, 0, 10.937828, 0, 0.1855036, 0)
+mesh = SubResource("CylinderMesh_7qbh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_7qbh3")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.6465445, 0)
+pixel_size = 0.124
+text = "Harbor"
+
+[node name="NewVillagerSpawnLocation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.8090076)

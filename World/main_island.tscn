@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccm8efo2hxs84"]
+
+[ext_resource type="Script" uid="uid://lql3h631h38d" path="res://World/island_world.gd" id="1_viy1l"]
+[ext_resource type="PackedScene" uid="uid://c4vpaymw4vllc" path="res://Buildings/structure_harbor.tscn" id="1_yvc3p"]
+[ext_resource type="PackedScene" uid="uid://tvsesooiwopu" path="res://Characters/villager_character.tscn" id="2_jjsx5"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jjsx5"]
+
+[node name="IslandWorld" type="Node3D"]
+script = ExtResource("1_viy1l")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_jjsx5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8508111, 0.25234386, -0.46091548, 0, 0.8771462, 0.4802235, 0.5254717, -0.4085795, 0.74628574, 0, 12.12076, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 200.0
+
+[node name="StructureHarbor" parent="." instance=ExtResource("1_yvc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.658276, 1.9537439, -13.861126)
+
+[node name="VillagerCharacter" parent="." instance=ExtResource("2_jjsx5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.866452, 0, -7.4743958)
+character_name = "Marshal"
+character_health = 10
+character_energy = 20
