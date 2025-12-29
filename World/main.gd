@@ -22,13 +22,12 @@ func _input(event):
 		else:
 			# Open main menu
 			main_menu_instance = main_menu_scene.instantiate() as MainMenu
-			_set_menu_buttons()
+			main_menu_instance.initialize_ui(current_world)
 			add_child(main_menu_instance)
 
 
 func _set_menu_buttons() -> void:
 	assert(is_instance_valid(main_menu_instance))
-	
 	assert(is_instance_valid(main_menu_instance.end_turn_button))
 	assert(is_instance_valid(main_menu_instance.spawn_villager_button))
 	assert(is_instance_valid(main_menu_instance.print_world_stats_button))

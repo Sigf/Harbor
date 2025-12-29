@@ -2,26 +2,27 @@ class_name IslandWorld extends Node3D
 
 signal turn_ended(turn_number: int)
 signal villager_spawned(new_villager: VillagerCharacter)
+signal villager_count_changed(new_villager_count: int)
+signal villagers_changed(villagers_list: Array[VillagerCharacter])
+signal stockpile_changed(new_stockpile: Dictionary[STOCKPILE, int])
 
 var current_turn: int
 var characters: Array[VillagerCharacter]
 var harbor_structure: StructureHarbor
-var wood_stockpile: int
-var food_stockpile: int
 
 const character_res = preload("res://Characters/villager_character.tscn")
 const new_villager_name_set: CharacterNameSet = preload("res://Characters/character_names_english.tres")
 
+enum STOCKPILE {FOOD, WOOD}
+var stockpile: Dictionary[STOCKPILE, int] = {
+	STOCKPILE.FOOD: 10,
+	STOCKPILE.WOOD: 20
+}
+
 
 func _ready():
 	current_turn = 0
-	wood_stockpile = 0
-	food_stockpile = 0
 	get_world_entities()
-
-
-func _process(delta) -> void:
-	pass
 
 
 func end_turn() -> void:
@@ -45,6 +46,8 @@ func spawn_villager() -> void:
 	print("Character ", new_character.character_name, " was added to the world.")
 	turn_ended.connect(new_character._on_turn_ended)
 	villager_spawned.emit(new_character)
+	villager_count_changed.emit(characters.size())
+	villagers_changed.emit(characters)
 
 
 func get_world_entities() -> void:
@@ -56,10 +59,41 @@ func get_world_entities() -> void:
 		# Get every already spawned characters
 		if child is VillagerCharacter:
 			var found_villager = child as VillagerCharacter
+			
+			# HACK: This will not be needed once worlds are saved and generated from code
+			if not is_instance_valid(found_villager.owning_world):
+				found_villager.owning_world = self
+				
 			turn_ended.connect(found_villager._on_turn_ended)
 			characters.append(found_villager)
 			
 	assert(is_instance_valid(harbor_structure))
+
+
+func try_use_stockpile(stockpile_type: STOCKPILE, ammount: int) -> bool:
+	assert(stockpile.has(stockpile_type))
+	assert(ammount > 0)
+	
+	if stockpile[stockpile_type] >= ammount:
+		stockpile[stockpile_type] -= ammount
+		stockpile_changed.emit(stockpile)
+		return true
+		
+	return false
+
+
+func try_add_to_stockpile(stockpile_type: STOCKPILE, ammount: int) -> bool:
+	assert(stockpile.has(stockpile_type))
+	assert(ammount > 0)
+	
+	# TODO: Should probably add a limit to stockpile
+	stockpile[stockpile_type] += ammount
+	stockpile_changed.emit(stockpile)
+	return true
+
+
+func get_current_villagers_count() -> int:
+	return characters.size()
 
 
 func print_world_stats() -> void:

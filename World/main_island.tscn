@@ -23,6 +23,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.658276, 1.9537439, -13.861
 
 [node name="VillagerCharacter" parent="." instance=ExtResource("2_jjsx5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.866452, 0, -7.4743958)
-character_name = "Marshal"
-character_health = 10
-character_energy = 20
+character_name = "Tav Marshal"
+current_health = 10
+current_energy = 20
+max_health = 10
+max_energy = 20

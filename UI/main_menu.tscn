@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmyg3q3mgk58u" path="res://UI/main_menu.gd" id="1_06t4h"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("end_turn_button", "spawn_villager_button", "print_world_stats_button")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("end_turn_button", "spawn_villager_button", "stockpile_food_value_label", "stockpile_wood_value_label", "current_turn_value_label", "current_villagers_count_value_label", "villagers_list")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,11 +10,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_06t4h")
-end_turn_button = NodePath("PanelContainer/VBoxContainer/EndTurnButton")
-spawn_villager_button = NodePath("PanelContainer/VBoxContainer/SpawnVillagerButton")
-print_world_stats_button = NodePath("PanelContainer/VBoxContainer/PrintWorldStatsButton")
+end_turn_button = NodePath("ActionsContainer/VBoxContainer/EndTurnButton")
+spawn_villager_button = NodePath("ActionsContainer/VBoxContainer/SpawnVillagerButton")
+stockpile_food_value_label = NodePath("StockpileContainer/HBoxContainer/FoodValueText")
+stockpile_wood_value_label = NodePath("StockpileContainer/HBoxContainer/WoodValueText")
+current_turn_value_label = NodePath("WorldStatsContainer/VBoxContainer/HBoxContainer/TurnCountLabel")
+current_villagers_count_value_label = NodePath("WorldStatsContainer/VBoxContainer/HBoxContainer2/VillagerCountLabel")
+villagers_list = NodePath("VillagersListContainer/VBoxContainer/VillagersList")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="ActionsContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -66.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ActionsContainer"]
+layout_mode = 2
+
+[node name="EndTurnButton" type="Button" parent="ActionsContainer/VBoxContainer"]
+layout_mode = 2
+text = "End Turn"
+
+[node name="SpawnVillagerButton" type="Button" parent="ActionsContainer/VBoxContainer"]
+layout_mode = 2
+text = "Spawn Villager"
+
+[node name="StockpileContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -23,17 +50,89 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="StockpileContainer"]
 layout_mode = 2
 
-[node name="EndTurnButton" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="StockpileContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-text = "End Turn"
 
-[node name="SpawnVillagerButton" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="StockpileContainer/HBoxContainer"]
 layout_mode = 2
-text = "Spawn Villager"
+text = "Food: "
 
-[node name="PrintWorldStatsButton" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="FoodValueText" type="Label" parent="StockpileContainer/HBoxContainer"]
 layout_mode = 2
-text = "Print World Stats"
+text = "0"
+
+[node name="VSeparator3" type="VSeparator" parent="StockpileContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="StockpileContainer/HBoxContainer"]
+layout_mode = 2
+text = "Wood: "
+
+[node name="WoodValueText" type="Label" parent="StockpileContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="VSeparator" type="VSeparator" parent="StockpileContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="VillagersListContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VillagersListContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VillagersListContainer/VBoxContainer"]
+layout_mode = 2
+text = " Villagers"
+
+[node name="HSeparator" type="HSeparator" parent="VillagersListContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VillagersList" type="ItemList" parent="VillagersListContainer/VBoxContainer"]
+layout_mode = 2
+allow_search = false
+auto_width = true
+auto_height = true
+
+[node name="WorldStatsContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WorldStatsContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WorldStatsContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WorldStatsContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Turn: "
+
+[node name="TurnCountLabel" type="Label" parent="WorldStatsContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="WorldStatsContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WorldStatsContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Villagers: "
+
+[node name="VillagerCountLabel" type="Label" parent="WorldStatsContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "0"
