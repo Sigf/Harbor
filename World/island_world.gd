@@ -6,11 +6,17 @@ signal villager_spawned(new_villager: VillagerCharacter)
 var current_turn: int
 var characters: Array[VillagerCharacter]
 var harbor_structure: StructureHarbor
+var wood_stockpile: int
+var food_stockpile: int
+
 const character_res = preload("res://Characters/villager_character.tscn")
+const new_villager_name_set: CharacterNameSet = preload("res://Characters/character_names_english.tres")
 
 
 func _ready():
 	current_turn = 0
+	wood_stockpile = 0
+	food_stockpile = 0
 	get_world_entities()
 
 
@@ -25,6 +31,7 @@ func end_turn() -> void:
 
 func spawn_villager() -> void:
 	assert(is_instance_valid(harbor_structure))
+	assert(is_instance_valid(new_villager_name_set))
 	
 	var spawn_location = harbor_structure.get_villager_spawn_location()
 	var new_character = character_res.instantiate() as VillagerCharacter
@@ -33,7 +40,8 @@ func spawn_villager() -> void:
 	add_child(new_character)
 	characters.append(new_character)
 	new_character.position = spawn_location
-	new_character.initialize_base_stats()
+	var new_character_name = new_villager_name_set.get_random_male_name()
+	new_character.initialize_character(self, new_character_name, 10, 20)
 	print("Character ", new_character.character_name, " was added to the world.")
 	turn_ended.connect(new_character._on_turn_ended)
 	villager_spawned.emit(new_character)

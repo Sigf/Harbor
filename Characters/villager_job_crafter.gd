@@ -1,7 +1,7 @@
 class_name VillagerJobCrafter extends VillagerJobBase
 
-var TargetRecipe
-var TargetQuantity
+var target_recipe
+var target_quantity
 
 func _init(owning_villager: VillagerCharacter) -> void:
 	super(owning_villager)

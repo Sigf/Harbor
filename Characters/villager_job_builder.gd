@@ -1,6 +1,6 @@
 class_name VillagerJobBuilder extends VillagerJobBase
 
-var TargetStructure
+var target_structure
 
 func _init(owning_villager: VillagerCharacter) -> void:
 	super(owning_villager)

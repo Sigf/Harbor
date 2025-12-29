@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterNameSet" load_steps=2 format=3 uid="uid://cxvi64gy82c4m"]
+
+[ext_resource type="Script" uid="uid://cx17pgq5d4rsb" path="res://Characters/character_name_set.gd" id="1_2h6ge"]
+
+[resource]
+script = ExtResource("1_2h6ge")
+male_names = Array[String](["James", "Tav", "Blake", "Jerry", "George", "Charlie", "Flynn", "Eugene", "Cody", "Peter", "Charles"])
+female_names = Array[String](["Sarah", "Gemma", "Kendra", "Alivia", "Zoe", "Anna", "Eliza", "Matilda", "Olivia", "Morgan", "Eve"])
+last_names = Array[String](["King", "Bennett", "Stevens", "Holt", "Foster", "Spencer", "Fields", "Price", "Edwards", "Witts"])
+metadata/_custom_type_script = "uid://cx17pgq5d4rsb"
