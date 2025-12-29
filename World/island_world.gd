@@ -6,16 +6,14 @@ signal villager_spawned(new_villager: VillagerCharacter)
 var current_turn: int
 var characters: Array[VillagerCharacter]
 var harbor_structure: StructureHarbor
-var character_res = preload("res://Characters/villager_character.tscn")
+const character_res = preload("res://Characters/villager_character.tscn")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	current_turn = 0
 	get_world_entities()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta) -> void:
 	pass
 
