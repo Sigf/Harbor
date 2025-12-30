@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5h02ul6xuvns"]
+
+[ext_resource type="Script" uid="uid://bd7y6luemi6rv" path="res://Buildings/structure_farm.gd" id="1_63sgd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_32wfm"]
+size = Vector3(3, 0.2, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dun0m"]
+albedo_color = Color(0.31351256, 0.21161067, 0.011748408, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jofh3"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kkv00"]
+albedo_color = Color(0.17779624, 0.51237315, 0.2638977, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_63sgd"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="TorusMesh" id="TorusMesh_63sgd"]
+inner_radius = 2.4
+outer_radius = 2.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lsay0"]
+albedo_color = Color(0.78006816, 4.721627e-05, 0.03351084, 1)
+
+[node name="ResourceNodeFarm" type="Node3D" node_paths=PackedStringArray("selection_indicator", "selection_static_body")]
+script = ExtResource("1_63sgd")
+selection_indicator = NodePath("SelectionMarker")
+selection_static_body = NodePath("StaticBody3D")
+
+[node name="PlaceholderMesh" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlaceholderMesh"]
+mesh = SubResource("BoxMesh_32wfm")
+surface_material_override/0 = SubResource("StandardMaterial3D_dun0m")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88048565, 0.025645733, -0.9597653)
+mesh = SubResource("SphereMesh_jofh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005793929, 0.025645733, -0.9419879)
+mesh = SubResource("SphereMesh_jofh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8657348, 0.025645733, -0.89389384)
+mesh = SubResource("SphereMesh_jofh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88048565, 0.025645733, -0.06514108)
+mesh = SubResource("SphereMesh_jofh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005793929, 0.025645733, -0.04736364)
+mesh = SubResource("SphereMesh_jofh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8657348, 0.025645733, 0.0007303953)
+mesh = SubResource("SphereMesh_jofh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88048565, 0.025645733, 0.77868235)
+mesh = SubResource("SphereMesh_jofh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005793929, 0.025645733, 0.7964598)
+mesh = SubResource("SphereMesh_jofh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8657348, 0.025645733, 0.8445538)
+mesh = SubResource("SphereMesh_jofh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_63sgd")
+
+[node name="SelectionMarker" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SelectionMarker"]
+mesh = SubResource("TorusMesh_63sgd")
+surface_material_override/0 = SubResource("StandardMaterial3D_lsay0")

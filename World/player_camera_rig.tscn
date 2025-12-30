@@ -5,5 +5,6 @@
 [node name="player_camera_rig" type="Node3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_qgm1y")
 camera = NodePath("main_camera")
+camera_height = 15.0
 
 [node name="main_camera" type="Camera3D" parent="."]

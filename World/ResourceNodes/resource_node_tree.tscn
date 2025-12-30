@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://6fdw7yi15b4g"]
+
+[ext_resource type="Script" uid="uid://de0d7gsixdnjp" path="res://World/ResourceNodes/resource_node_tree.gd" id="1_aqowq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3b2kq"]
+top_radius = 0.2
+bottom_radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2a1re"]
+albedo_color = Color(0.4049574, 0.33381045, 0.08700404, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tuxc6"]
+top_radius = 0.0
+bottom_radius = 1.0
+height = 3.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otn77"]
+albedo_color = Color(0.2098251, 0.35083914, 0.14250544, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ymas3"]
+radius = 1.2963867
+height = 5.411865
+
+[sub_resource type="TorusMesh" id="TorusMesh_aqowq"]
+inner_radius = 1.4
+outer_radius = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymas3"]
+albedo_color = Color(0.78006816, 4.721627e-05, 0.03351084, 1)
+
+[node name="ResourceNodeTree" type="Node3D" node_paths=PackedStringArray("selection_indicator", "selection_static_body")]
+script = ExtResource("1_aqowq")
+selection_indicator = NodePath("SelectionMarker")
+selection_static_body = NodePath("StaticBody3D")
+
+[node name="PlaceholderMesh" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.947868, 0)
+mesh = SubResource("CylinderMesh_3b2kq")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2a1re")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PlaceholderMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.249312, 0)
+mesh = SubResource("CylinderMesh_tuxc6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_otn77")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.291363, 0)
+shape = SubResource("CapsuleShape3D_ymas3")
+
+[node name="SelectionMarker" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SelectionMarker"]
+mesh = SubResource("TorusMesh_aqowq")
+surface_material_override/0 = SubResource("StandardMaterial3D_ymas3")

@@ -1,5 +1,6 @@
-class_name MainMenu extends Control
+class_name WorldUI extends Control
 
+@export var owning_world: IslandWorld
 @export var end_turn_button: Button
 @export var spawn_villager_button: Button
 @export var stockpile_food_value_label: Label
@@ -8,9 +9,39 @@ class_name MainMenu extends Control
 @export var current_villagers_count_value_label: Label
 @export var villagers_list: ItemList
 
+var structure_menu: StructureMenu
+var structure_menu_scene = preload("res://UI/structure_menu.tscn")
 
-func initialize_ui(owning_world: IslandWorld) -> void:
-	assert(is_instance_valid(owning_world))
+
+func _ready():
+	owning_world.world_loaded.connect(_on_world_loaded)
+
+
+func _input(event):
+	if event.is_action_pressed("interact"):
+		assert(is_instance_valid(owning_world))
+		if is_instance_valid(owning_world.current_selected_structure) and not is_instance_valid(structure_menu):
+			structure_menu = structure_menu_scene.instantiate() as StructureMenu
+			structure_menu.initialize_ui(owning_world, owning_world.current_selected_structure)
+			add_child(structure_menu)
+			structure_menu.assign_villager_button.grab_focus.call_deferred()
+			
+	if event.is_action_pressed("cancel") and is_instance_valid(structure_menu):
+		remove_child(structure_menu)
+		structure_menu = null
+	
+	if event.is_action_pressed("add_villager"):
+		assert(is_instance_valid(owning_world))
+		owning_world.spawn_villager()
+	
+	if event.is_action_pressed("end_turn"):
+		assert(is_instance_valid(owning_world))
+		owning_world.end_turn()
+
+
+func initialize_ui(in_owning_world: IslandWorld) -> void:
+	assert(is_instance_valid(in_owning_world))
+	owning_world = in_owning_world
 	
 	assert(is_instance_valid(end_turn_button))
 	assert(is_instance_valid(spawn_villager_button))
@@ -52,3 +83,7 @@ func _on_villagers_list_changed(new_villagers_list: Array[VillagerCharacter]) ->
 	
 	for villager in new_villagers_list:
 		villagers_list.add_item(villager.character_name)
+
+
+func _on_world_loaded() -> void:
+	initialize_ui(owning_world)

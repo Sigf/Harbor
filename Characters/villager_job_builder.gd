@@ -2,10 +2,10 @@ class_name VillagerJobBuilder extends VillagerJobBase
 
 var target_structure
 
-func _init(owning_villager: VillagerCharacter) -> void:
-	super(owning_villager)
+func _init(in_owning_villager: VillagerCharacter) -> void:
+	super(in_owning_villager)
 	job_title = "Builder"
 
 
 func do_work() -> void:
-	print("Villager ", villager_owner.character_name, " did some building.")
+	print("Villager ", owning_villager.character_name, " did some building.")

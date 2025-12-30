@@ -29,13 +29,14 @@ func initialize_character(new_owning_world: IslandWorld, new_name: String, start
 	character_name = new_name
 	max_health = start_health
 	max_energy = start_energy
-	current_health = max_health
+	current_health = max_health 
 	current_energy = max_energy
 	owning_world = new_owning_world
 
 
-func assign_work(job_class: VillagerJobBase) -> void:
-	current_job = job_class.new()
+func assign_work(new_job: VillagerJobBase) -> void:
+	assert(is_instance_valid(new_job))
+	current_job = new_job
 
 
 func try_eat_food() -> bool:

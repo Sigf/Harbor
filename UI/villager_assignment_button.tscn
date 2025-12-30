@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpd8ao7hjjnob"]
+
+[ext_resource type="Script" uid="uid://bk2tjdb0prm8j" path="res://UI/villager_assignment_button.gd" id="1_xho0b"]
+
+[node name="VillagerAssignmentButton" type="Control" node_paths=PackedStringArray("assign_villager_button")]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xho0b")
+assign_villager_button = NodePath("PanelContainer/HBoxContainer/AssignVillagerButton")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="AssignVillagerButton" type="Button" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Villager Name"

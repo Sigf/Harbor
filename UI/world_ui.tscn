@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://msh5kq077gyc"]
 
-[ext_resource type="Script" uid="uid://dmyg3q3mgk58u" path="res://UI/main_menu.gd" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://dmyg3q3mgk58u" path="res://UI/world_ui.gd" id="1_03566"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("end_turn_button", "spawn_villager_button", "stockpile_food_value_label", "stockpile_wood_value_label", "current_turn_value_label", "current_villagers_count_value_label", "villagers_list")]
+[node name="WorldUI" type="Control" node_paths=PackedStringArray("end_turn_button", "spawn_villager_button", "stockpile_food_value_label", "stockpile_wood_value_label", "current_turn_value_label", "current_villagers_count_value_label", "villagers_list")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_06t4h")
+script = ExtResource("1_03566")
 end_turn_button = NodePath("ActionsContainer/VBoxContainer/EndTurnButton")
 spawn_villager_button = NodePath("ActionsContainer/VBoxContainer/SpawnVillagerButton")
 stockpile_food_value_label = NodePath("StockpileContainer/HBoxContainer/FoodValueText")

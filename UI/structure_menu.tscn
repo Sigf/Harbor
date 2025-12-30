@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://g1rly3tqcg3q"]
+
+[ext_resource type="Script" uid="uid://df20u4j0rel1c" path="res://UI/structure_menu.gd" id="1_dcvvd"]
+
+[node name="StructureMenu" type="Control" node_paths=PackedStringArray("assign_villager_button", "villager_list_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dcvvd")
+assign_villager_button = NodePath("PanelContainer/HBoxContainer/VBoxContainer/AssignVillagerButton")
+villager_list_container = NodePath("PanelContainer/HBoxContainer/VillagerListContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="AssignVillagerButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Assign Villager
+"
+
+[node name="VillagerListContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2

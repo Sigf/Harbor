@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccm8efo2hxs84"]
+[gd_scene load_steps=9 format=3 uid="uid://ccm8efo2hxs84"]
 
 [ext_resource type="Script" uid="uid://lql3h631h38d" path="res://World/island_world.gd" id="1_viy1l"]
 [ext_resource type="PackedScene" uid="uid://c4vpaymw4vllc" path="res://Buildings/structure_harbor.tscn" id="1_yvc3p"]
 [ext_resource type="PackedScene" uid="uid://tvsesooiwopu" path="res://Characters/villager_character.tscn" id="2_jjsx5"]
+[ext_resource type="PackedScene" uid="uid://6fdw7yi15b4g" path="res://World/ResourceNodes/resource_node_tree.tscn" id="4_8e10n"]
+[ext_resource type="PackedScene" uid="uid://c5h02ul6xuvns" path="res://Buildings/structure_farm.tscn" id="5_q4vth"]
+[ext_resource type="PackedScene" uid="uid://cjbv3o7isahvm" path="res://World/ResourceNodes/resource_node_bush.tscn" id="6_x5hqi"]
+[ext_resource type="PackedScene" uid="uid://msh5kq077gyc" path="res://UI/world_ui.tscn" id="7_q4vth"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jjsx5"]
 
@@ -10,7 +14,7 @@
 script = ExtResource("1_viy1l")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0.046802044, -0.06828117, 0.051274776)
 mesh = SubResource("PlaneMesh_jjsx5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -18,8 +22,9 @@ transform = Transform3D(0.8508111, 0.25234386, -0.46091548, 0, 0.8771462, 0.4802
 shadow_enabled = true
 directional_shadow_max_distance = 200.0
 
-[node name="StructureHarbor" parent="." instance=ExtResource("1_yvc3p")]
+[node name="StructureHarbor" parent="." node_paths=PackedStringArray("owning_world") instance=ExtResource("1_yvc3p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.658276, 1.9537439, -13.861126)
+owning_world = NodePath("..")
 
 [node name="VillagerCharacter" parent="." instance=ExtResource("2_jjsx5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.866452, 0, -7.4743958)
@@ -28,3 +33,22 @@ current_health = 10
 current_energy = 20
 max_health = 10
 max_energy = 20
+
+[node name="ResourceNodeTree" parent="." node_paths=PackedStringArray("owning_world") instance=ExtResource("4_8e10n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.388789, 0, -9.763144)
+owning_world = NodePath("..")
+
+[node name="ResourceNodeFarm" parent="." node_paths=PackedStringArray("owning_world") instance=ExtResource("5_q4vth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.031471, -9.536743e-07, -5.295394)
+owning_world = NodePath("..")
+
+[node name="ResourceNodeBush" parent="." node_paths=PackedStringArray("owning_world") instance=ExtResource("6_x5hqi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5089421, 0, -5.0773373)
+owning_world = NodePath("..")
+
+[node name="ResourceNodeBush2" parent="." node_paths=PackedStringArray("owning_world") instance=ExtResource("6_x5hqi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.397822, -9.536743e-07, -1.3709626)
+owning_world = NodePath("..")
+
+[node name="MainMenu" parent="." node_paths=PackedStringArray("owning_world") instance=ExtResource("7_q4vth")]
+owning_world = NodePath("..")

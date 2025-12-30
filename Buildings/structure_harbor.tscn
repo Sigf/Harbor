@@ -10,6 +10,7 @@ albedo_color = Color(0.61960787, 0.38039216, 0.91764706, 1)
 [node name="StructureHarbor" type="Node3D" node_paths=PackedStringArray("villager_spawn_location") groups=["Structures"]]
 script = ExtResource("1_12lm8")
 villager_spawn_location = NodePath("NewVillagerSpawnLocation")
+is_selectable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(10.937828, 0, 0, 0, 2.8065464, 0, 0, 0, 10.937828, 0, 0.1855036, 0)

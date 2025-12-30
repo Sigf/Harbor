@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://pwbmr73v2u4r"]
+
+[ext_resource type="Script" uid="uid://dpf8km3p26n5h" path="res://World/selectable_structure.gd" id="1_g7qre"]
+
+[node name="SelectableNode" type="Node3D" node_paths=PackedStringArray("static_body")]
+script = ExtResource("1_g7qre")
+static_body = NodePath("")

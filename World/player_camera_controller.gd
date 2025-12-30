@@ -36,9 +36,9 @@ func _process(delta):
 	
 	update_camera_transform()
 
+
 func update_camera_transform() -> void:
-	if not camera:
-		return
+	assert(is_instance_valid(camera))
 	
 	var offset = Vector3(0.0, camera_height, camera_distance)
 	offset = offset.rotated(Vector3.UP, deg_to_rad(current_rotation))
