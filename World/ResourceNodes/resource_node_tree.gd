@@ -1,5 +1,7 @@
 class_name ResourceNodeTree extends ResourceNode
 
+var wood_resource: WorldResource = preload("res://World/WorldResources/wood_resource.tres")
+
 
 func make_job(in_villager: VillagerCharacter) -> VillagerJobBase:
 	return VillagerJobGatherer.new(in_villager, self)
@@ -11,7 +13,7 @@ func try_extract_resources(in_villager: VillagerCharacter) -> bool:
 	
 	var ammount_gathered: int = 5
 	
-	if owning_world.try_add_to_stockpile(IslandWorld.STOCKPILE.WOOD, ammount_gathered):
+	if owning_world.try_add_to_stockpile(wood_resource, ammount_gathered):
 		print("Villager ", in_villager.character_name, " gathered ", ammount_gathered, " units of wood from a tree.")
 		return true
 	

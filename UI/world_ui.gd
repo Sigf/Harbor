@@ -1,5 +1,8 @@
 class_name WorldUI extends Control
 
+var wood_resource: WorldResource = preload("res://World/WorldResources/wood_resource.tres")
+var food_resource: WorldResource = preload("res://World/WorldResources/food_resource.tres")
+
 @export var owning_world: IslandWorld
 @export var end_turn_button: Button
 @export var spawn_villager_button: Button
@@ -65,9 +68,9 @@ func initialize_ui(in_owning_world: IslandWorld) -> void:
 	owning_world.villagers_changed.connect(_on_villagers_list_changed)
 
 
-func _on_stockpile_changed(new_stockpile: Dictionary[IslandWorld.STOCKPILE, int]) -> void:
-	stockpile_food_value_label.text = str(new_stockpile[IslandWorld.STOCKPILE.FOOD])
-	stockpile_wood_value_label.text = str(new_stockpile[IslandWorld.STOCKPILE.WOOD])
+func _on_stockpile_changed(new_stockpile: Dictionary[WorldResource, int]) -> void:
+	stockpile_food_value_label.text = str(new_stockpile[food_resource])
+	stockpile_wood_value_label.text = str(new_stockpile[wood_resource])
 
 
 func _on_turn_ended(turn_number: int) -> void:

@@ -1,5 +1,7 @@
 class_name VillagerCharacter extends Node3D
 
+var food_resource: WorldResource = preload("res://World/WorldResources/food_resource.tres")
+
 @export var character_name: String
 @export var current_health: int
 @export var current_energy: int
@@ -29,7 +31,7 @@ func initialize_character(new_owning_world: IslandWorld, new_name: String, start
 	character_name = new_name
 	max_health = start_health
 	max_energy = start_energy
-	current_health = max_health 
+	current_health = max_health
 	current_energy = max_energy
 	owning_world = new_owning_world
 
@@ -42,7 +44,7 @@ func assign_work(new_job: VillagerJobBase) -> void:
 func try_eat_food() -> bool:
 	assert(is_instance_valid(owning_world))
 	
-	var ate_food = owning_world.try_use_stockpile(IslandWorld.STOCKPILE.FOOD, 1)
+	var ate_food = owning_world.try_use_stockpile(food_resource, 1)
 	if ate_food:
 		current_energy = max_energy
 	else:

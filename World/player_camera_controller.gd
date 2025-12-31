@@ -24,7 +24,7 @@ func _process(delta):
 	current_rotation += rotate_input * rotation_speed * delta * 100.0
 	
 	# Update target location
-	var move_input := Vector2(Input.get_action_strength("move_forward")-Input.get_action_strength("move_backward"), Input.get_action_raw_strength("move_right")-Input.get_action_strength("move_left"))
+	var move_input := Vector2(Input.get_action_strength("move_forward") - Input.get_action_strength("move_backward"), Input.get_action_raw_strength("move_right") - Input.get_action_strength("move_left"))
 	var camera_forward := -camera.global_transform.basis.z
 	camera_forward.y = 0.0
 	camera_forward = camera_forward.normalized()

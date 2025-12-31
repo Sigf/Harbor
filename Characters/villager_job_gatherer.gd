@@ -4,7 +4,7 @@ var gathering_node: ResourceNode
 
 
 func _init(in_owning_villager: VillagerCharacter, in_node: ResourceNode) -> void:
-	super(in_owning_villager)
+	super (in_owning_villager)
 	assert(is_instance_valid(in_node))
 	
 	job_title = "Gatherer"

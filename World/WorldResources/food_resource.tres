@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="WorldResource" load_steps=2 format=3 uid="uid://dtepefy5lhq6e"]
+
+[ext_resource type="Script" uid="uid://c7dxx6nsfq2ur" path="res://World/WorldResources/world_resource.gd" id="1_8cij8"]
+
+[resource]
+script = ExtResource("1_8cij8")
+world_resource_name = "Food"
+metadata/_custom_type_script = "uid://c7dxx6nsfq2ur"

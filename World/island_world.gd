@@ -1,10 +1,13 @@
 class_name IslandWorld extends Node3D
 
+var wood_resource: WorldResource = preload("res://World/WorldResources/wood_resource.tres")
+var food_resource: WorldResource = preload("res://World/WorldResources/food_resource.tres")
+
 signal turn_ended(turn_number: int)
 signal villager_spawned(new_villager: VillagerCharacter)
 signal villager_count_changed(new_villager_count: int)
 signal villagers_changed(villagers_list: Array[VillagerCharacter])
-signal stockpile_changed(new_stockpile: Dictionary[STOCKPILE, int])
+signal stockpile_changed(new_stockpile: Dictionary[WorldResource, int])
 signal current_selected_structure_changed(new_structure: WorldStructure)
 signal world_loaded()
 
@@ -18,14 +21,14 @@ const character_res = preload("res://Characters/villager_character.tscn")
 const new_villager_name_set: CharacterNameSet = preload("res://Characters/character_names_english.tres")
 
 enum STOCKPILE {FOOD, WOOD}
-var stockpile: Dictionary[STOCKPILE, int] = {
-	STOCKPILE.FOOD: 10,
-	STOCKPILE.WOOD: 20
+var stockpile: Dictionary[WorldResource, int] = {
+	food_resource: 10,
+	wood_resource: 20
 }
 
 # Daily log variables
-var resource_used: Dictionary[STOCKPILE, int]
-var resource_gathered: Dictionary[STOCKPILE, int]
+var resource_used: Dictionary[WorldResource, int]
+var resource_gathered: Dictionary[WorldResource, int]
 var new_villagers: Array[VillagerCharacter]
 
 
@@ -114,7 +117,7 @@ func get_world_entities() -> void:
 	assert(is_instance_valid(harbor_structure))
 
 
-func try_use_stockpile(stockpile_type: STOCKPILE, ammount: int) -> bool:
+func try_use_stockpile(stockpile_type: WorldResource, ammount: int) -> bool:
 	assert(stockpile.has(stockpile_type))
 	assert(ammount > 0)
 	
@@ -132,7 +135,7 @@ func try_use_stockpile(stockpile_type: STOCKPILE, ammount: int) -> bool:
 	return false
 
 
-func try_add_to_stockpile(stockpile_type: STOCKPILE, ammount: int) -> bool:
+func try_add_to_stockpile(stockpile_type: WorldResource, ammount: int) -> bool:
 	assert(stockpile.has(stockpile_type))
 	assert(ammount > 0)
 	
@@ -171,4 +174,4 @@ func print_daily_log() -> void:
 	print("Turn ", current_turn, "ended.")
 	print("Resource Gathered:")
 	for resource in resource_gathered:
-		print("  ", resource_gathered[resource], " ", str(resource))
+		print("  ", resource_gathered[resource], " ", str(resource.world_resource_name))
