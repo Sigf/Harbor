@@ -171,7 +171,16 @@ func _reset_daily_tracked_variables() -> void:
 
 
 func print_daily_log() -> void:
-	print("Turn ", current_turn, "ended.")
+	print("Turn ", current_turn, " ended.")
+	
 	print("Resource Gathered:")
 	for resource in resource_gathered:
 		print("  ", resource_gathered[resource], " ", str(resource.world_resource_name))
+	
+	print("Resource Used:")
+	for resource in resource_used:
+		print("  ", resource_used[resource], " ", str(resource.world_resource_name))
+	
+	print("New Villagers:")
+	for villager in new_villagers:
+		print("  ", villager.character_name)

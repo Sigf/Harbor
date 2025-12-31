@@ -51,3 +51,8 @@ func try_eat_food() -> bool:
 		current_energy = ceil(max_energy / 2.0)
 	
 	return ate_food
+
+
+func remove_job(target_job: VillagerJobBase) -> void:
+	if is_instance_valid(current_job) and current_job == target_job:
+		current_job = null

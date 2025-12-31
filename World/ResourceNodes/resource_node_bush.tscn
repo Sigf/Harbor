@@ -1,11 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjbv3o7isahvm"]
+[gd_scene load_steps=12 format=3 uid="uid://cjbv3o7isahvm"]
 
 [ext_resource type="Script" uid="uid://i6pcxf2hlox2" path="res://World/ResourceNodes/resource_node_bush.gd" id="1_3f7er"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_a5g6s"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3vld"]
-albedo_color = Color(0.17990118, 0.5034071, 0.24882078, 1)
+[ext_resource type="Resource" uid="uid://dtepefy5lhq6e" path="res://World/WorldResources/food_resource.tres" id="2_xg6xm"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jco56"]
 top_radius = 0.1
@@ -14,6 +10,11 @@ height = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hm3p7"]
 albedo_color = Color(0.3002334, 0.22056988, 0.00873306, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_a5g6s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3vld"]
+albedo_color = Color(0.17990118, 0.5034071, 0.24882078, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_yojkm"]
 radius = 0.05
@@ -33,55 +34,70 @@ outer_radius = 1.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg5i6"]
 albedo_color = Color(0.78006816, 4.721627e-05, 0.03351084, 1)
 
-[node name="ResourceNodeBush" type="Node3D" node_paths=PackedStringArray("selection_indicator", "selection_static_body")]
+[node name="ResourceNodeBush" type="Node3D" node_paths=PackedStringArray("ripe_representation", "selection_indicator", "selection_static_body")]
 script = ExtResource("1_3f7er")
+ripe_representation = NodePath("PlaceholderMesh/Fruits")
+turns_to_ripen = 3
+resource_amount_when_ripe = 10
+resource_type = ExtResource("2_xg6xm")
+resource_amount = 10
 selection_indicator = NodePath("SelectionMarker")
 selection_static_body = NodePath("SelectionCollision")
+structure_name = "Fruit Bush"
 
 [node name="PlaceholderMesh" type="Node3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PlaceholderMesh"]
+mesh = SubResource("CylinderMesh_jco56")
+surface_material_override/0 = SubResource("StandardMaterial3D_hm3p7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlaceholderMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52997357, 0)
 mesh = SubResource("SphereMesh_a5g6s")
 surface_material_override/0 = SubResource("StandardMaterial3D_c3vld")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="PlaceholderMesh"]
-mesh = SubResource("CylinderMesh_jco56")
-surface_material_override/0 = SubResource("StandardMaterial3D_hm3p7")
+[node name="Fruits" type="Node3D" parent="PlaceholderMesh"]
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="PlaceholderMesh/Fruits"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4474671, 0.7455784, 0.018885076)
 mesh = SubResource("SphereMesh_yojkm")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ciief")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PlaceholderMesh/Fruits"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16880122, 0.46237856, 0.4543717)
 mesh = SubResource("SphereMesh_yojkm")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ciief")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="PlaceholderMesh/Fruits"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27872142, 0.6704458, 0.35600704)
 mesh = SubResource("SphereMesh_yojkm")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ciief")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="PlaceholderMesh/Fruits"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27872142, 0.88983303, -0.19078457)
 mesh = SubResource("SphereMesh_yojkm")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ciief")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="PlaceholderMesh/Fruits"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47624752, 0.34058684, -0.029513955)
 mesh = SubResource("SphereMesh_yojkm")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ciief")
 
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="PlaceholderMesh/Fruits"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10882345, 0.34058684, -0.44393587)
 mesh = SubResource("SphereMesh_yojkm")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ciief")
 
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="PlaceholderMesh/Fruits"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39316735, 0.32951754, -0.21608424)
 mesh = SubResource("SphereMesh_yojkm")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ciief")
 
 [node name="SelectionCollision" type="StaticBody3D" parent="."]

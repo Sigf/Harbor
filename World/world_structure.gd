@@ -4,6 +4,7 @@
 @export var selection_indicator: Node3D
 @export var selection_static_body: StaticBody3D
 @export var is_selectable: bool = true
+@export var structure_name: String
 
 @abstract func make_job(in_villager: VillagerCharacter) -> VillagerJobBase
 

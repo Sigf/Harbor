@@ -9,6 +9,7 @@ func _init(in_owning_villager: VillagerCharacter, in_node: ResourceNode) -> void
 	
 	job_title = "Gatherer"
 	gathering_node = in_node
+	in_node.resource_depleted.connect(_on_node_depleted)
 
 
 func do_work() -> void:
@@ -16,3 +17,9 @@ func do_work() -> void:
 	
 	if not gathering_node.try_extract_resources(owning_villager):
 		print("Villager ", owning_villager.character_name, " tried to gather node but couldn't.")
+
+
+func _on_node_depleted(node: ResourceNode) -> void:
+	print("Villager ", owning_villager.character_name, "'s gathering node (", node.structure_name, ") has been depleted.")
+	# Drop the job since the resource is gone.
+	owning_villager.remove_job(self)

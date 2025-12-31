@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5h02ul6xuvns"]
+[gd_scene load_steps=10 format=3 uid="uid://c5h02ul6xuvns"]
 
 [ext_resource type="Script" uid="uid://bd7y6luemi6rv" path="res://Buildings/structure_farm.gd" id="1_63sgd"]
+[ext_resource type="Resource" uid="uid://dtepefy5lhq6e" path="res://World/WorldResources/food_resource.tres" id="2_lsay0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_32wfm"]
 size = Vector3(3, 0.2, 3)
@@ -25,10 +26,15 @@ outer_radius = 2.6
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lsay0"]
 albedo_color = Color(0.78006816, 4.721627e-05, 0.03351084, 1)
 
-[node name="ResourceNodeFarm" type="Node3D" node_paths=PackedStringArray("selection_indicator", "selection_static_body")]
+[node name="ResourceNodeFarm" type="Node3D" node_paths=PackedStringArray("grown_representation", "selection_indicator", "selection_static_body")]
 script = ExtResource("1_63sgd")
+grown_representation = NodePath("PlaceholderMesh/Crops")
+turns_to_grow = 5
+resource_amount_when_grown = 30
+resource_type = ExtResource("2_lsay0")
 selection_indicator = NodePath("SelectionMarker")
 selection_static_body = NodePath("StaticBody3D")
+structure_name = "Cabbage Farm"
 
 [node name="PlaceholderMesh" type="Node3D" parent="."]
 
@@ -36,49 +42,60 @@ selection_static_body = NodePath("StaticBody3D")
 mesh = SubResource("BoxMesh_32wfm")
 surface_material_override/0 = SubResource("StandardMaterial3D_dun0m")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="Crops" type="Node3D" parent="PlaceholderMesh"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PlaceholderMesh/Crops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88048565, 0.025645733, -0.9597653)
 mesh = SubResource("SphereMesh_jofh3")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="PlaceholderMesh/Crops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005793929, 0.025645733, -0.9419879)
 mesh = SubResource("SphereMesh_jofh3")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PlaceholderMesh/Crops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8657348, 0.025645733, -0.89389384)
 mesh = SubResource("SphereMesh_jofh3")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="PlaceholderMesh/Crops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88048565, 0.025645733, -0.06514108)
 mesh = SubResource("SphereMesh_jofh3")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="PlaceholderMesh/Crops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005793929, 0.025645733, -0.04736364)
 mesh = SubResource("SphereMesh_jofh3")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="PlaceholderMesh/Crops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8657348, 0.025645733, 0.0007303953)
 mesh = SubResource("SphereMesh_jofh3")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
 
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="PlaceholderMesh/Crops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88048565, 0.025645733, 0.77868235)
 mesh = SubResource("SphereMesh_jofh3")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
 
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="PlaceholderMesh/Crops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005793929, 0.025645733, 0.7964598)
 mesh = SubResource("SphereMesh_jofh3")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
 
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="PlaceholderMesh"]
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="PlaceholderMesh/Crops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8657348, 0.025645733, 0.8445538)
 mesh = SubResource("SphereMesh_jofh3")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kkv00")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
