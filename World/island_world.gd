@@ -32,20 +32,20 @@ var resource_gathered: Dictionary[WorldResource, int]
 var new_villagers: Array[VillagerCharacter]
 
 
-func _ready():
+func _ready() -> void:
 	current_turn = 0
 	get_world_entities()
 	active_camera = get_viewport().get_camera_3d()
 	world_loaded.emit()
 
 
-func _physics_process(delta):
-	var space_state = get_world_3d().direct_space_state
-	var origin = active_camera.global_position
-	var collision_mask = 0b10 # Only target structures
-	var end = origin + -active_camera.global_transform.basis.z * 10000.0
-	var query = PhysicsRayQueryParameters3D.create(origin, end, collision_mask)
-	var result = space_state.intersect_ray(query)
+func _physics_process(delta: float) -> void:
+	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
+	var origin: Vector3 = active_camera.global_position
+	var collision_mask: int = 0b10 # Only target structures
+	var end: Vector3 = origin + -active_camera.global_transform.basis.z * 10000.0
+	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, end, collision_mask)
+	var result: Dictionary = space_state.intersect_ray(query)
 	
 	# Deselect if we are not pointing at the structure anymore
 	if result.is_empty() && is_instance_valid(current_selected_structure):
@@ -55,8 +55,8 @@ func _physics_process(delta):
 	
 	# Select if we are pointing at new structure, deselect old one
 	if not result.is_empty():
-		var collider = result.collider as StaticBody3D
-		var owning_structure = collider.get_parent_node_3d() as WorldStructure
+		var collider: StaticBody3D = result.collider as StaticBody3D
+		var owning_structure: WorldStructure = collider.get_parent_node_3d() as WorldStructure
 		
 		if is_instance_valid(owning_structure) and owning_structure != current_selected_structure:
 			if is_instance_valid(current_selected_structure):
@@ -80,15 +80,15 @@ func spawn_villager() -> void:
 	assert(is_instance_valid(harbor_structure))
 	assert(is_instance_valid(new_villager_name_set))
 	
-	var spawn_location = harbor_structure.get_villager_spawn_location()
-	var new_character = character_res.instantiate() as VillagerCharacter
+	var spawn_location: Vector3 = harbor_structure.get_villager_spawn_location()
+	var new_character: VillagerCharacter = character_res.instantiate() as VillagerCharacter
 	assert(is_instance_valid(new_character))
 	
 	add_child(new_character)
 	characters.append(new_character)
 	new_villagers.append(new_character)
 	new_character.position = spawn_location
-	var new_character_name = new_villager_name_set.get_random_male_name()
+	var new_character_name: String = new_villager_name_set.get_random_male_name()
 	new_character.initialize_character(self, new_character_name, 10, 20)
 	print("Character ", new_character.character_name, " was added to the world.")
 	turn_ended.connect(new_character._on_turn_ended)
@@ -105,7 +105,8 @@ func get_world_entities() -> void:
 			
 		# Get every already spawned characters
 		if child is VillagerCharacter:
-			var found_villager = child as VillagerCharacter
+			var found_villager: VillagerCharacter = child as VillagerCharacter
+			assert(is_instance_valid(found_villager))
 			
 			# HACK: This will not be needed once worlds are saved and generated from code
 			if not is_instance_valid(found_villager.owning_world):

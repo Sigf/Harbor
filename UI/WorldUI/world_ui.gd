@@ -13,14 +13,14 @@ var food_resource: WorldResource = preload("res://World/WorldResources/food_reso
 @export var villager_info_panel: VillagerInfoPanel
 
 var structure_menu: StructureMenu
-var structure_menu_scene = preload("res://UI/structure_menu.tscn")
+var structure_menu_scene: PackedScene = preload("res://UI/structure_menu.tscn")
 
 
-func _ready():
+func _ready() -> void:
 	owning_world.world_loaded.connect(_on_world_loaded)
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		assert(is_instance_valid(owning_world))
 		if is_instance_valid(owning_world.current_selected_structure) and not is_instance_valid(structure_menu):

@@ -18,7 +18,7 @@ func do_work() -> void:
 		print("No work assigned to ", character_name, ".")
 
 
-func _on_turn_ended(turn_number: int):
+func _on_turn_ended(turn_number: int) -> void:
 	do_work()
 	if not try_eat_food():
 		print("Villager ", character_name, " could not find anything to eat.")
@@ -44,7 +44,7 @@ func assign_work(new_job: VillagerJobBase) -> void:
 func try_eat_food() -> bool:
 	assert(is_instance_valid(owning_world))
 	
-	var ate_food = owning_world.try_use_stockpile(food_resource, 1)
+	var ate_food: bool = owning_world.try_use_stockpile(food_resource, 1)
 	if ate_food:
 		current_energy = max_energy
 	else:
