@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://oqgtgw2tj6hm"]
+
+[ext_resource type="Script" uid="uid://cwxcxe5wp0jop" path="res://UI/WorldUI/villager_view_container.gd" id="1_fxuqj"]
+
+[node name="VillagerViewContainer" type="PanelContainer" node_paths=PackedStringArray("VillagerNameLabel", "VillagerHealthLabel", "VillagerAvailableEnergyLabel")]
+custom_minimum_size = Vector2(150, 300)
+offset_right = 150.0
+offset_bottom = 90.0
+script = ExtResource("1_fxuqj")
+VillagerNameLabel = NodePath("ScrollContainer/VBoxContainer/VillagerNameLabel")
+VillagerHealthLabel = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/VillagerHealthLabel")
+VillagerAvailableEnergyLabel = NodePath("ScrollContainer/VBoxContainer/HBoxContainer2/VillagerAvailableEnergyLabel")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VillagerNameLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Villager Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Health: "
+
+[node name="VillagerHealthLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "00"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Available Energy: "
+
+[node name="VillagerAvailableEnergyLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "00"
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Job Queue"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2

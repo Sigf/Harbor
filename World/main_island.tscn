@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://6fdw7yi15b4g" path="res://World/ResourceNodes/resource_node_tree.tscn" id="4_8e10n"]
 [ext_resource type="PackedScene" uid="uid://c5h02ul6xuvns" path="res://Buildings/structure_farm.tscn" id="5_q4vth"]
 [ext_resource type="PackedScene" uid="uid://cjbv3o7isahvm" path="res://World/ResourceNodes/resource_node_bush.tscn" id="6_x5hqi"]
-[ext_resource type="PackedScene" uid="uid://msh5kq077gyc" path="res://UI/world_ui.tscn" id="7_q4vth"]
+[ext_resource type="PackedScene" uid="uid://msh5kq077gyc" path="res://UI/WorldUI/world_ui.tscn" id="7_q4vth"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jjsx5"]
 

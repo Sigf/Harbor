@@ -1,0 +1,1 @@
+class_name VillagerSelectionButton extends Button

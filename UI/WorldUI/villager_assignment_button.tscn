@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dpd8ao7hjjnob"]
 
-[ext_resource type="Script" uid="uid://bk2tjdb0prm8j" path="res://UI/villager_assignment_button.gd" id="1_xho0b"]
+[ext_resource type="Script" uid="uid://bk2tjdb0prm8j" path="res://UI/WorldUI/villager_assignment_button.gd" id="1_xho0b"]
 
 [node name="VillagerAssignmentButton" type="Control" node_paths=PackedStringArray("assign_villager_button")]
 custom_minimum_size = Vector2(0, 30)

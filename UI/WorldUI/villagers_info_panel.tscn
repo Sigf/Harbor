@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://xadaaw1n36w0"]
+
+[ext_resource type="Script" uid="uid://bturpxepcknj3" path="res://UI/WorldUI/villagers_info_panel.gd" id="1_s16ls"]
+[ext_resource type="PackedScene" uid="uid://oqgtgw2tj6hm" path="res://UI/WorldUI/villager_view_container.tscn" id="2_27s13"]
+
+[node name="VillagersInfoPanel" type="PanelContainer" node_paths=PackedStringArray("villager_list_container", "villager_view_container")]
+custom_minimum_size = Vector2(0, 300)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_s16ls")
+villager_list_container = NodePath("HBoxContainer/VBoxContainer/ScrollContainer/VillagerListContainer")
+villager_view_container = NodePath("HBoxContainer/VillagerViewContainer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = " Villagers"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VillagerListContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VillagerViewContainer" parent="HBoxContainer" instance=ExtResource("2_27s13")]
+layout_mode = 2

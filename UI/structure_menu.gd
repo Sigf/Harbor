@@ -2,7 +2,7 @@ class_name StructureMenu extends Control
 
 @export var assign_villager_button: Button
 @export var villager_list_container: VBoxContainer
-var villager_assignment_button_scene = preload("res://UI/villager_assignment_button.tscn")
+var villager_assignment_button_scene = preload("res://UI/WorldUI/villager_assignment_button.tscn")
 
 var current_world: IslandWorld
 var current_structure: WorldStructure
