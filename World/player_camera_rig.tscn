@@ -1,10 +1,53 @@
-[gd_scene load_steps=2 format=3 uid="uid://rbwjy0emnyoe"]
+[gd_scene load_steps=7 format=3 uid="uid://rbwjy0emnyoe"]
 
 [ext_resource type="Script" uid="uid://bs4w3trp08gnx" path="res://World/player_camera_controller.gd" id="1_qgm1y"]
 
-[node name="player_camera_rig" type="Node3D" node_paths=PackedStringArray("camera")]
-script = ExtResource("1_qgm1y")
-camera = NodePath("main_camera")
-camera_height = 15.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_wd4pi"]
 
-[node name="main_camera" type="Camera3D" parent="."]
+[sub_resource type="CylinderMesh" id="CylinderMesh_wd4pi"]
+top_radius = 0.1
+bottom_radius = 0.0
+height = 0.2
+radial_segments = 12
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q70rn"]
+albedo_color = Color(0.7884682, 0.26713496, 0.2352356, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_rjsgv"]
+inner_radius = 0.2
+outer_radius = 0.25
+rings = 12
+ring_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7s83"]
+albedo_color = Color(0.7884682, 0.26713496, 0.2352356, 1)
+
+[node name="player_camera_rig" type="Node3D" node_paths=PackedStringArray("camera", "spring_arm", "cursor_node")]
+script = ExtResource("1_qgm1y")
+camera = NodePath("SpringArm3D/main_camera")
+spring_arm = NodePath("SpringArm3D")
+cursor_node = NodePath("Cursor")
+zoom_speed = 15.0
+smooth_speed = 8.0
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+shape = SubResource("SphereShape3D_wd4pi")
+
+[node name="main_camera" type="Camera3D" parent="SpringArm3D"]
+
+[node name="Cursor" type="Node3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cursor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1616843, 0)
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("CylinderMesh_wd4pi")
+surface_material_override/0 = SubResource("StandardMaterial3D_q70rn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Cursor"]
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("TorusMesh_rjsgv")
+surface_material_override/0 = SubResource("StandardMaterial3D_c7s83")
