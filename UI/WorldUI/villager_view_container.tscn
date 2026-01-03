@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" uid="uid://cwxcxe5wp0jop" path="res://UI/WorldUI/villager_view_container.gd" id="1_fxuqj"]
 
-[node name="VillagerViewContainer" type="PanelContainer" node_paths=PackedStringArray("VillagerNameLabel", "VillagerHealthLabel", "VillagerAvailableEnergyLabel")]
-custom_minimum_size = Vector2(150, 300)
+[node name="VillagerViewContainer" type="PanelContainer" node_paths=PackedStringArray("villager_name_label", "villager_health_label", "villager_available_energy_label", "job_queue_container")]
+custom_minimum_size = Vector2(200, 300)
 offset_right = 150.0
 offset_bottom = 90.0
 script = ExtResource("1_fxuqj")
-VillagerNameLabel = NodePath("ScrollContainer/VBoxContainer/VillagerNameLabel")
-VillagerHealthLabel = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/VillagerHealthLabel")
-VillagerAvailableEnergyLabel = NodePath("ScrollContainer/VBoxContainer/HBoxContainer2/VillagerAvailableEnergyLabel")
+villager_name_label = NodePath("ScrollContainer/VBoxContainer/VillagerNameLabel")
+villager_health_label = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/VillagerHealthLabel")
+villager_available_energy_label = NodePath("ScrollContainer/VBoxContainer/HBoxContainer2/VillagerAvailableEnergyLabel")
+job_queue_container = NodePath("ScrollContainer/VBoxContainer/JobQueueContainer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
@@ -17,6 +18,7 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VillagerNameLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -56,5 +58,6 @@ theme_override_font_sizes/font_size = 12
 text = "Job Queue"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="JobQueueContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3

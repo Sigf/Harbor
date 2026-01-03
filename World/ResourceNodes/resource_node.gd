@@ -6,31 +6,23 @@ signal resource_depleted(node: ResourceNode)
 
 @export var resource_type: WorldResource
 @export var resource_amount: int
+@export var base_energy_cost: int
 
-func make_job(in_villager: VillagerCharacter) -> VillagerJobBase:
-	return VillagerJobGatherer.new(in_villager, self)
-
-# Function to figure out how much a villager can gather from this node. This can be overridden by subclasses for different behavior.
-# TODO: Consider villager skills, tools, etc.
-func calculate_gathering_amount(in_villager: VillagerCharacter) -> int:
-	return 5
+var jobs_assigned: Array[VillagerJobGatherer] = []
 
 
-func try_extract_resources(in_villager: VillagerCharacter) -> bool:
-	assert(is_instance_valid(in_villager))
+func try_extract_resources(amount_to_extract: int) -> bool:
 	assert(is_instance_valid(owning_world))
-	
-	var amount_gathered: int = calculate_gathering_amount(in_villager)
 
 	# Ensure we don't gather more than what's available
-	if amount_gathered > resource_amount:
-		amount_gathered = resource_amount
+	if amount_to_extract > resource_amount:
+		amount_to_extract = resource_amount
 	
 	# Remove resources from the node and add to the world's stockpile
-	if owning_world.try_add_to_stockpile(resource_type, amount_gathered):
-		resource_amount -= amount_gathered
-		resources_extracted.emit(self, resource_type, amount_gathered)
-		_on_resource_extracted(in_villager, amount_gathered)
+	if owning_world.try_add_to_stockpile(resource_type, amount_to_extract):
+		resource_amount -= amount_to_extract
+		resources_extracted.emit(self, resource_type, amount_to_extract)
+		_on_resource_extracted(amount_to_extract)
 		
 		if resource_amount <= 0:
 			resource_depleted.emit(self)
@@ -41,9 +33,14 @@ func try_extract_resources(in_villager: VillagerCharacter) -> bool:
 		return false
 
 
-func _on_resource_extracted(villager: VillagerCharacter, extracted_amount: int) -> void:
-	pass
+func _on_resource_extracted(extracted_amount: int) -> void:
+	print(extracted_amount, " ", resource_type.world_resource_name, " extracted from ", structure_name, ".")
 
 
 func _on_resource_depleted() -> void:
-	pass
+	print("Node ", structure_name, " has been depleted of its resources.")
+
+
+func _on_assigned_job_completed(job: VillagerJobBase) -> void:
+	if job in jobs_assigned:
+		jobs_assigned.erase(job)

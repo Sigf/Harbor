@@ -14,10 +14,6 @@ func _ready() -> void:
 	ripe_representation.visible = true
 
 
-func _on_resource_extracted(villager: VillagerCharacter, extracted_amount: int) -> void:
-	print("Villager ", villager.character_name, " gathered ", extracted_amount, " of ", resource_type.world_resource_name, " from a bush.")
-
-
 func _on_resource_depleted() -> void:
 	print("A bush has been depleted of its resources and will regrow in ", turns_to_ripen, " turns.")
 	turns_until_ripe = turns_to_ripen

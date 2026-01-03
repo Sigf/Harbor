@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyf3wu4xtiyqq"]
+
+[ext_resource type="Script" uid="uid://dwafmlq42rvkj" path="res://UI/WorldUI/job_queue_list_item.gd" id="1_afmdw"]
+
+[node name="JobQueueListItem" type="PanelContainer" node_paths=PackedStringArray("job_type_label", "job_description_label", "cancel_job_button")]
+offset_right = 70.0
+offset_bottom = 31.0
+script = ExtResource("1_afmdw")
+job_type_label = NodePath("HBoxContainer/JobTypeLabel")
+job_description_label = NodePath("HBoxContainer/JobDescription")
+cancel_job_button = NodePath("HBoxContainer/CancelJobButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 4
+
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="JobTypeLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+text = "Job Type"
+vertical_alignment = 1
+
+[node name="JobDescription" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 8
+text = "Job Description"
+vertical_alignment = 1
+
+[node name="CancelJobButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Cancel"

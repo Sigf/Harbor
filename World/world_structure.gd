@@ -6,7 +6,6 @@
 @export var is_selectable: bool = true
 @export var structure_name: String
 
-@abstract func make_job(in_villager: VillagerCharacter) -> VillagerJobBase
 
 var selected: bool:
 	set(value):

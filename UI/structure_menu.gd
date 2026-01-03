@@ -30,13 +30,25 @@ func generate_villager_list() -> void:
 		
 	assert(is_instance_valid(current_world))
 	assert(is_instance_valid(current_structure))
+
+	# HACK: Can only assign villagers to gathering nodees for now
+	if current_structure is not ResourceNode:
+		return
 	
 	# Generate new list
 	var button_array: Array[VillagerAssignmentButton]
 	for villager in current_world.characters:
-		if not villager.current_job:
+		# Check if the structure can make a job for this villager
+		if VillagerJobGatherer.can_make_job_from_node(villager, current_structure as ResourceNode):
 			var new_button: VillagerAssignmentButton = villager_assignment_button_scene.instantiate() as VillagerAssignmentButton
-			new_button.initialize_ui(self, villager, current_structure.make_job(villager))
+			new_button.initialize_ui(self, villager)
+
+			# Generate the new job only when the button is pressed
+			new_button.assign_villager_button.pressed.connect(func() -> void:
+				var new_job: VillagerJobGatherer = VillagerJobGatherer.make_job_from_node(villager, current_structure as ResourceNode)
+				villager.assign_work(new_job)
+				self.close_window())
+			
 			villager_list_container.add_child(new_button)
 			villager_list_container.reset_size()
 			button_array.append(new_button)

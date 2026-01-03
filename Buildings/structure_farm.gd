@@ -17,12 +17,13 @@ func _ready() -> void:
 	grown_representation.visible = false
 
 
-func try_extract_resources(in_villager: VillagerCharacter) -> bool:
+# HACK: Move this class to another base class, as this is a buildable structure and has more complicated logic for gathering.
+func try_extract_resources(amount_to_extract: int) -> bool:
 	if resource_amount <= 0 && not watered:
 		watered = true
 		return false
 	
-	return super.try_extract_resources(in_villager)
+	return super.try_extract_resources(amount_to_extract)
 
 
 func calculate_gathering_amount(in_villager: VillagerCharacter) -> int:

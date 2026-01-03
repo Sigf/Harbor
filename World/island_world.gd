@@ -114,21 +114,25 @@ func get_world_entities() -> void:
 				
 			turn_ended.connect(found_villager._on_turn_ended)
 			characters.append(found_villager)
+	
+	# If no villagers exist, spawn one to start
+	if characters.is_empty():
+		spawn_villager()
 			
 	assert(is_instance_valid(harbor_structure))
 
 
-func try_use_stockpile(stockpile_type: WorldResource, ammount: int) -> bool:
+func try_use_stockpile(stockpile_type: WorldResource, amount: int) -> bool:
 	assert(stockpile.has(stockpile_type))
-	assert(ammount > 0)
+	assert(amount > 0)
 	
-	if stockpile[stockpile_type] >= ammount:
-		stockpile[stockpile_type] -= ammount
+	if stockpile[stockpile_type] >= amount:
+		stockpile[stockpile_type] -= amount
 		
 		if resource_used.has(stockpile_type):
-			resource_used[stockpile_type] += ammount
+			resource_used[stockpile_type] += amount
 		else:
-			resource_used[stockpile_type] = ammount
+			resource_used[stockpile_type] = amount
 			
 		stockpile_changed.emit(stockpile)
 		return true
@@ -136,17 +140,17 @@ func try_use_stockpile(stockpile_type: WorldResource, ammount: int) -> bool:
 	return false
 
 
-func try_add_to_stockpile(stockpile_type: WorldResource, ammount: int) -> bool:
+func try_add_to_stockpile(stockpile_type: WorldResource, amount: int) -> bool:
 	assert(stockpile.has(stockpile_type))
-	assert(ammount > 0)
+	assert(amount > 0)
 	
 	# TODO: Should probably add a limit to stockpile
-	stockpile[stockpile_type] += ammount
+	stockpile[stockpile_type] += amount
 	
 	if resource_gathered.has(stockpile_type):
-		resource_gathered[stockpile_type] += ammount
+		resource_gathered[stockpile_type] += amount
 	else:
-		resource_gathered[stockpile_type] = ammount
+		resource_gathered[stockpile_type] = amount
 	
 	stockpile_changed.emit(stockpile)
 	return true

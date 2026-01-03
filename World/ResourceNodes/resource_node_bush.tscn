@@ -41,6 +41,7 @@ turns_to_ripen = 3
 resource_amount_when_ripe = 10
 resource_type = ExtResource("2_xg6xm")
 resource_amount = 10
+base_energy_cost = 5
 selection_indicator = NodePath("SelectionMarker")
 selection_static_body = NodePath("SelectionCollision")
 structure_name = "Fruit Bush"
