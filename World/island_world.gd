@@ -18,7 +18,7 @@ var active_camera: Camera3D
 var current_selected_structure: WorldStructure
 
 const character_res = preload("res://Characters/villager_character.tscn")
-const new_villager_name_set: CharacterNameSet = preload("res://Characters/character_names_english.tres")
+const new_villager_name_set: CharacterNameSet = preload("res://Characters/NameSets/character_names_english.tres")
 
 enum STOCKPILE {FOOD, WOOD}
 var stockpile: Dictionary[WorldResource, int] = {

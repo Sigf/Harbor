@@ -13,7 +13,7 @@ var food_resource: WorldResource = preload("res://World/WorldResources/food_reso
 @export var villager_info_panel: VillagerInfoPanel
 
 var structure_menu: StructureMenu
-var structure_menu_scene: PackedScene = preload("res://UI/structure_menu.tscn")
+var structure_menu_scene: PackedScene = preload("res://UI/WorldUI/structure_menu.tscn")
 
 
 func _ready() -> void:

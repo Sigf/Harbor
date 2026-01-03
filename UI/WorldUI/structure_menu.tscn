@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://g1rly3tqcg3q"]
 
-[ext_resource type="Script" uid="uid://df20u4j0rel1c" path="res://UI/structure_menu.gd" id="1_dcvvd"]
+[ext_resource type="Script" uid="uid://df20u4j0rel1c" path="res://UI/WorldUI/structure_menu.gd" id="1_dcvvd"]
 
 [node name="StructureMenu" type="Control" node_paths=PackedStringArray("assign_villager_button", "villager_list_container")]
 layout_mode = 3
