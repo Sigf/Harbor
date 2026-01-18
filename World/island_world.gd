@@ -1,4 +1,8 @@
 class_name IslandWorld extends Node3D
+# The world where the game runs. Manages the turn system, world entities, and current world states such as stockpiles. Any entities in the world should be spawned by this class so they can reference their owning world.
+
+@export var construction_grid: ConstructionGrid
+@export var camera_controller: PlayerCameraController
 
 var wood_resource: WorldResource = preload("res://World/WorldResources/wood_resource.tres")
 var food_resource: WorldResource = preload("res://World/WorldResources/food_resource.tres")
@@ -33,6 +37,9 @@ var new_villagers: Array[VillagerCharacter]
 
 
 func _ready() -> void:
+	assert(is_instance_valid(construction_grid))
+	assert(is_instance_valid(camera_controller))
+
 	current_turn = 0
 	get_world_entities()
 	active_camera = get_viewport().get_camera_3d()
@@ -67,8 +74,13 @@ func _physics_process(delta: float) -> void:
 			
 			current_selected_structure.selected = true
 			current_selected_structure_changed.emit(current_selected_structure)
+	
+	# Pass updated cursor position to construction grid
+	construction_grid.cursor_position = camera_controller.target_position
 
 
+# End the current turn, triggering any turn ended events and printing daily logs.
+# At the end of the turn, all the villagers run their assigned tasks, and gathering nodes calculate their new resource ammounts for example.
 func end_turn() -> void:
 	turn_ended.emit(current_turn)
 	print_daily_log()
@@ -76,6 +88,7 @@ func end_turn() -> void:
 	current_turn += 1
 
 
+# Spawn a new villager at the harbor with a random name and default stats. Adds the new villager to the list of tracked characters in the world.
 func spawn_villager() -> void:
 	assert(is_instance_valid(harbor_structure))
 	assert(is_instance_valid(new_villager_name_set))
@@ -97,6 +110,7 @@ func spawn_villager() -> void:
 	villagers_changed.emit(characters)
 
 
+# Gather all world entities such as structures and characters that are part of the world. This will be handled differently once the world is loaded from an existing save file.
 func get_world_entities() -> void:
 	for child in self.get_children():
 		# Find one harbor structure

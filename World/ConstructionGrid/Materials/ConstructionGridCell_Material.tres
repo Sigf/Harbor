@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dq1a8a0fvlj0u"]
+
+[ext_resource type="Shader" uid="uid://db70f5w6mhlpt" path="res://World/ConstructionGrid/Materials/ConstructionGridCell_shader.gdshader" id="1_qtqol"]
+[ext_resource type="Texture2D" uid="uid://b28ks76r3u1g3" path="res://World/ConstructionGrid/Textures/WavyNoiseTexture.png" id="2_f8v1o"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_qtqol")
+shader_parameter/noise = ExtResource("2_f8v1o")
+shader_parameter/scroll_speed = 0.2
+shader_parameter/emissive_color = Color(0.06886543, 0.7885525, 0.9540748, 1)
+shader_parameter/emissive_boost = 4.0
+shader_parameter/cursor_fade_max_distance = 15.0
+shader_parameter/cursor_position = Vector3(0, 0, 0)

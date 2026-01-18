@@ -7,7 +7,8 @@
 [node name="Main" type="Node3D"]
 script = ExtResource("1_h2yge")
 
-[node name="MainIslandWorld" parent="." instance=ExtResource("1_0xm2m")]
+[node name="MainIslandWorld" parent="." node_paths=PackedStringArray("camera_controller") instance=ExtResource("1_0xm2m")]
+camera_controller = NodePath("../PlayerCameraController")
 
 [node name="PlayerCameraController" parent="." instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0038071275, -0.001620084, -0.003038764)

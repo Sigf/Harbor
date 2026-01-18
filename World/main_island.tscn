@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccm8efo2hxs84"]
+[gd_scene load_steps=9 format=3 uid="uid://ccm8efo2hxs84"]
 
 [ext_resource type="Script" uid="uid://lql3h631h38d" path="res://World/island_world.gd" id="1_viy1l"]
 [ext_resource type="PackedScene" uid="uid://c4vpaymw4vllc" path="res://Buildings/structure_harbor.tscn" id="1_yvc3p"]
 [ext_resource type="PackedScene" uid="uid://6fdw7yi15b4g" path="res://World/ResourceNodes/resource_node_tree.tscn" id="4_8e10n"]
+[ext_resource type="PackedScene" uid="uid://bal7tqj3t640w" path="res://World/ConstructionGrid/construction_grid.tscn" id="6_8e10n"]
 [ext_resource type="PackedScene" uid="uid://cjbv3o7isahvm" path="res://World/ResourceNodes/resource_node_bush.tscn" id="6_x5hqi"]
 [ext_resource type="PackedScene" uid="uid://msh5kq077gyc" path="res://UI/WorldUI/world_ui.tscn" id="7_q4vth"]
 
@@ -11,11 +12,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_q4vth"]
 size = Vector3(2, 0.2, 2)
 
-[node name="IslandWorld" type="Node3D"]
+[node name="IslandWorld" type="Node3D" node_paths=PackedStringArray("construction_grid")]
 script = ExtResource("1_viy1l")
+construction_grid = NodePath("ConstructionGrid")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0.047, 0, 0.051)
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0.11124761, 0, 0.03657663)
 mesh = SubResource("PlaneMesh_jjsx5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
@@ -48,3 +50,6 @@ owning_world = NodePath("..")
 
 [node name="MainMenu" parent="." node_paths=PackedStringArray("owning_world") instance=ExtResource("7_q4vth")]
 owning_world = NodePath("..")
+
+[node name="ConstructionGrid" parent="." instance=ExtResource("6_8e10n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.288532, 0, -14.175858)
