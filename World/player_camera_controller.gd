@@ -1,4 +1,5 @@
 class_name PlayerCameraController extends Node3D
+# Controls the player camera. Allows or smooth rotation, zooming, and movement. Similar to the camera controls in Fantasy Life i in construction mode.
 
 @export var camera: Camera3D
 @export var spring_arm: SpringArm3D

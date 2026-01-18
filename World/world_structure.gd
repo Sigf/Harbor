@@ -1,4 +1,5 @@
 @abstract class_name WorldStructure extends Node3D
+# Structures within the world. Those strucutures can optionally be selectable, where an indicator on them will toggle visibility when selected.
 
 @export var owning_world: IslandWorld
 @export var selection_indicator: Node3D
