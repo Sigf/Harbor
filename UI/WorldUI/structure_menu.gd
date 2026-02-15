@@ -8,16 +8,26 @@ var current_world: IslandWorld
 var current_structure: WorldStructure
 
 
-func initialize_ui(owner_world: IslandWorld, target_structure: WorldStructure) -> void:
-	current_structure = target_structure
-	current_world = owner_world
-	grab_focus.call_deferred()
+func _ready() -> void:
+	assert(is_instance_valid(assign_villager_button))
+	assert(is_instance_valid(villager_list_container))
+
 	assign_villager_button.pressed.connect(_on_assign_villager_button_pressed)
 
 
+func initialize_ui(owner_world: IslandWorld, target_structure: WorldStructure) -> void:
+	current_structure = target_structure
+	current_world = owner_world
+
+	# Set default focus when opening the menu
+	assign_villager_button.grab_focus()
+
+
 func _process(delta: float) -> void:
-	assert(is_instance_valid(current_structure))
-	
+	if not visible:
+		return
+
+	# Update menu position to follow structure
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	var target_screen_position: Vector2 = camera.unproject_position(current_structure.global_position)
 	set_position(target_screen_position)
@@ -41,7 +51,7 @@ func generate_villager_list() -> void:
 		# Check if the structure can make a job for this villager
 		if VillagerJobGatherer.can_make_job_from_node(villager, current_structure as ResourceNode):
 			var new_button: VillagerAssignmentButton = villager_assignment_button_scene.instantiate() as VillagerAssignmentButton
-			new_button.initialize_ui(self, villager)
+			new_button.initialize_ui(self , villager)
 
 			# Generate the new job only when the button is pressed
 			new_button.assign_villager_button.pressed.connect(func() -> void:
@@ -66,6 +76,9 @@ func _on_assign_villager_button_pressed() -> void:
 func close_window() -> void:
 	var parent: WorldUI = get_parent() as WorldUI
 	assert(is_instance_valid(parent))
-	
-	parent.structure_menu = null
-	parent.remove_child(self)
+
+	# clear generated villager list
+	for child in villager_list_container.get_children():
+		child.queue_free()
+
+	parent.close_structure_menu()

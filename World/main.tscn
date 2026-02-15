@@ -1,14 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bywky3hjvogs1"]
+[gd_scene load_steps=3 format=3 uid="uid://bywky3hjvogs1"]
 
 [ext_resource type="PackedScene" uid="uid://ccm8efo2hxs84" path="res://World/main_island.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://dei3pqrmbuuba" path="res://World/main.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://rbwjy0emnyoe" path="res://World/player_camera_rig.tscn" id="2_h2yge"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_h2yge")
 
-[node name="MainIslandWorld" parent="." node_paths=PackedStringArray("camera_controller") instance=ExtResource("1_0xm2m")]
-camera_controller = NodePath("../PlayerCameraController")
-
-[node name="PlayerCameraController" parent="." instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0038071275, -0.001620084, -0.003038764)
+[node name="MainIslandWorld" parent="." instance=ExtResource("1_0xm2m")]

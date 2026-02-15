@@ -4,7 +4,7 @@
 
 [node name="ConstructionGrid" type="Node3D"]
 script = ExtResource("1_eq0bg")
-grid_quadrants_size = 7
+grid_quadrants_size = 5
 grid_quadrants_x = 6
 grid_quadrants_y = 6
 available_color = Color(2.0696223e-06, 0.470554, 0.5286841, 1)

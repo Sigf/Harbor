@@ -19,6 +19,7 @@ var target_position: Vector3 = Vector3.ZERO
 var current_rotation: float = 0.0
 var current_camera_angle: float = 0.0
 var current_camera_distance: float = 10.0
+var active: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,6 +36,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not active:
+		return
+
 	# Update rotation
 	var rotate_input := -Input.get_action_strength("rotate_right") + Input.get_action_strength("rotate_left")
 	current_rotation += rotate_input * rotation_speed * delta * 100.0

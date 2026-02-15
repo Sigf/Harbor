@@ -18,6 +18,10 @@ var cursor_position: Vector3
 var grid_cells: Array[Cell] = []
 var multimesh_rid: RID
 var grid_instance_rid: RID
+var grid_visible: bool = true:
+    set(value):
+        _on_grid_visibility_changed(value)
+        visible = value
 
 enum CellState {AVAILABLE, SELECTED, INVALID}
 
@@ -114,14 +118,8 @@ class Cell:
 
 func generate_test_grid() -> void:
     assert(multimesh_rid.is_valid())
-    # Generate a test grid for visualization in the editor
-
-    # var multimesh: MultiMesh = grid_instance_mesh.multimesh
-    # multimesh.instance_count = grid_quadrants_x * grid_quadrants_y
-    # multimesh.visible_instance_count = multimesh.instance_count
 
     var cell_count: int = grid_quadrants_x * grid_quadrants_y
-
     var origin: Vector3 = global_transform.origin;
     for i in cell_count:
         var x_index: int = i % grid_quadrants_x
@@ -134,9 +132,6 @@ func generate_test_grid() -> void:
         # add new cell
         var new_cell: Cell = Cell.new(grid_quadrants_size, cell_position, i)
         grid_cells.append(new_cell)
-
-        #multimesh.set_instance_transform(i, cell_transform)
-        #multimesh.set_instance_color(i, available_color)
 
 
 func _ready() -> void:
@@ -163,8 +158,9 @@ func _ready() -> void:
 
     # Place quadrants on landscape surface
     generate_test_grid()
-
     _update_multimesh_buffer()
+
+    grid_visible = false
 
 
 func _exit_tree() -> void:
@@ -185,9 +181,21 @@ func _update_multimesh_buffer() -> void:
     RenderingServer.multimesh_set_buffer(multimesh_rid, new_buffer)
 
 
+func _on_grid_visibility_changed(new_visibility: bool) -> void:
+    assert(grid_instance_rid.is_valid())
+
+    if new_visibility:
+        RenderingServer.multimesh_set_visible_instances(multimesh_rid, grid_cells.size())
+    else:
+        RenderingServer.multimesh_set_visible_instances(multimesh_rid, 0)
+
+
 func _process(delta: float) -> void:
+    # Early out if grid is not supposed to be visible
+    if not grid_visible:
+        return
+
     # Pass cursor position to shader
-    #grid_instance_mesh.material_override.set_shader_parameter("cursor_position", cursor_position);
     grid_material.set_shader_parameter("cursor_position", cursor_position);
     # Update cell color based on cursor position
     for cell in grid_cells:

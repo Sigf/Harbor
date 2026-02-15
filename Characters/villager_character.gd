@@ -11,7 +11,7 @@ var current_health: int
 var current_energy: int:
 	set(value):
 		current_energy = clamp(value, 0, max_energy)
-		energy_changed.emit(self, current_energy)
+		energy_changed.emit(self , current_energy)
 
 signal job_queue_changed(villager: VillagerCharacter, job_queue: Array[VillagerJobBase])
 signal energy_changed(villager: VillagerCharacter, new_energy: int)
@@ -40,7 +40,7 @@ func _on_turn_ended(turn_number: int) -> void:
 		if is_instance_valid(job_copy):
 			assign_work(job_copy)
 	
-	job_queue_changed.emit(self, job_queue)
+	job_queue_changed.emit(self , job_queue)
 
 
 func initialize_character(new_owning_world: IslandWorld, new_name: String, start_health: int, start_energy: int) -> void:
@@ -64,7 +64,7 @@ func assign_work(new_job: VillagerJobBase) -> void:
 	current_energy -= new_job.energy_cost
 	job_queue.append(new_job)
 	new_job.on_job_assigned()
-	job_queue_changed.emit(self, job_queue)
+	job_queue_changed.emit(self , job_queue)
 
 
 func try_eat_food() -> bool:
@@ -84,4 +84,5 @@ func remove_job(target_job: VillagerJobBase) -> void:
 	
 	if job_queue.has(target_job):
 		current_energy += target_job.energy_cost # Refund energy cost
-		target_job.cancel_job()
+		job_queue.erase(target_job)
+		job_queue_changed.emit(self , job_queue)

@@ -1,15 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://msh5kq077gyc"]
+[gd_scene load_steps=5 format=3 uid="uid://msh5kq077gyc"]
 
 [ext_resource type="Script" uid="uid://c7fsy1xh4wa2c" path="res://UI/WorldUI/world_ui.gd" id="1_03566"]
 [ext_resource type="PackedScene" uid="uid://xadaaw1n36w0" path="res://UI/WorldUI/villagers_info_panel.tscn" id="2_cppu4"]
+[ext_resource type="PackedScene" uid="uid://bm60k3x6x558o" path="res://UI/WorldUI/WorldModeMenu/world_mode_menu.tscn" id="3_4agap"]
+[ext_resource type="PackedScene" uid="uid://g1rly3tqcg3q" path="res://UI/WorldUI/structure_menu.tscn" id="4_maiwv"]
 
-[node name="WorldUI" type="Control" node_paths=PackedStringArray("end_turn_button", "spawn_villager_button", "stockpile_food_value_label", "stockpile_wood_value_label", "current_turn_value_label", "current_villagers_count_value_label", "villager_info_panel")]
+[node name="WorldUI" type="Control" node_paths=PackedStringArray("end_turn_button", "spawn_villager_button", "stockpile_food_value_label", "stockpile_wood_value_label", "current_turn_value_label", "current_villagers_count_value_label", "villager_info_panel", "gameplay_mode_menu", "structure_menu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_behavior_recursive = 2
 script = ExtResource("1_03566")
 end_turn_button = NodePath("ActionsContainer/VBoxContainer/EndTurnButton")
 spawn_villager_button = NodePath("ActionsContainer/VBoxContainer/SpawnVillagerButton")
@@ -18,6 +21,8 @@ stockpile_wood_value_label = NodePath("StockpileContainer/HBoxContainer/WoodValu
 current_turn_value_label = NodePath("WorldStatsContainer/VBoxContainer/HBoxContainer/TurnCountLabel")
 current_villagers_count_value_label = NodePath("WorldStatsContainer/VBoxContainer/HBoxContainer2/VillagerCountLabel")
 villager_info_panel = NodePath("VillagersInfoPanel")
+gameplay_mode_menu = NodePath("WorldModeMenu")
+structure_menu = NodePath("StructureMenu")
 
 [node name="ActionsContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -83,8 +88,16 @@ custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="VillagersInfoPanel" parent="." instance=ExtResource("2_cppu4")]
-layout_mode = 0
-offset_bottom = 300.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
 
 [node name="WorldStatsContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -119,3 +132,17 @@ text = "Villagers: "
 [node name="VillagerCountLabel" type="Label" parent="WorldStatsContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "0"
+
+[node name="WorldModeMenu" parent="." node_paths=PackedStringArray("owning_world_ui") instance=ExtResource("3_4agap")]
+layout_mode = 1
+offset_left = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+owning_world_ui = NodePath("..")
+
+[node name="StructureMenu" parent="." instance=ExtResource("4_maiwv")]
+layout_mode = 0
+offset_left = 595.99994
+offset_top = 389.39996
+offset_right = 595.99994
+offset_bottom = 389.39996

@@ -11,35 +11,30 @@ var food_resource: WorldResource = preload("res://World/WorldResources/food_reso
 @export var current_turn_value_label: Label
 @export var current_villagers_count_value_label: Label
 @export var villager_info_panel: VillagerInfoPanel
-
-var structure_menu: StructureMenu
-var structure_menu_scene: PackedScene = preload("res://UI/WorldUI/structure_menu.tscn")
+@export var gameplay_mode_menu: WorldModeMenu
+@export var structure_menu: StructureMenu
 
 
 func _ready() -> void:
+	assert(is_instance_valid(owning_world))
 	owning_world.world_loaded.connect(_on_world_loaded)
+	owning_world.gameplay_mode_changed.connect(_on_gameplay_mode_changed)
+	structure_menu.visible = false
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact"):
-		assert(is_instance_valid(owning_world))
-		if is_instance_valid(owning_world.current_selected_structure) and not is_instance_valid(structure_menu):
-			structure_menu = structure_menu_scene.instantiate() as StructureMenu
-			structure_menu.initialize_ui(owning_world, owning_world.current_selected_structure)
-			add_child(structure_menu)
-			structure_menu.assign_villager_button.grab_focus.call_deferred()
-			
-	if event.is_action_pressed("cancel") and is_instance_valid(structure_menu):
-		remove_child(structure_menu)
-		structure_menu = null
-	
-	if event.is_action_pressed("add_villager"):
-		assert(is_instance_valid(owning_world))
-		owning_world.spawn_villager()
-	
-	if event.is_action_pressed("end_turn"):
-		assert(is_instance_valid(owning_world))
-		owning_world.end_turn()
+func open_structure_menu(target_structure: WorldStructure) -> void:
+	assert(is_instance_valid(structure_menu))
+	assert(is_instance_valid(target_structure))
+
+	structure_menu.visible = true
+	structure_menu.initialize_ui(owning_world, target_structure)
+
+
+func close_structure_menu() -> void:
+	assert(is_instance_valid(structure_menu))
+
+	structure_menu.visible = false
+	structure_menu.release_focus()
 
 
 func initialize_ui(in_owning_world: IslandWorld) -> void:
@@ -55,7 +50,7 @@ func initialize_ui(in_owning_world: IslandWorld) -> void:
 	assert(is_instance_valid(villager_info_panel))
 	
 	# Initialize values from current world
-	villager_info_panel.initialize_ui(self)
+	villager_info_panel.initialize_ui(self )
 	_on_stockpile_changed(owning_world.stockpile)
 	_on_turn_ended(owning_world.current_turn)
 	_on_villager_count_changed(owning_world.get_current_villagers_count())
@@ -83,3 +78,17 @@ func _on_villager_count_changed(new_villager_count: int) -> void:
 
 func _on_world_loaded() -> void:
 	initialize_ui(owning_world)
+
+
+func _on_gameplay_mode_changed(previous_mode: IslandWorld.WORLD_GAMEPLAY_MODE, new_mode: IslandWorld.WORLD_GAMEPLAY_MODE) -> void:
+	assert(is_instance_valid(gameplay_mode_menu))
+	gameplay_mode_menu.on_world_ui_mode_changed(new_mode)
+
+	match previous_mode:
+		IslandWorld.WORLD_GAMEPLAY_MODE.VILLAGERS_INFO:
+			villager_info_panel.visible = false
+
+	match new_mode:
+		IslandWorld.WORLD_GAMEPLAY_MODE.VILLAGERS_INFO:
+			villager_info_panel.visible = true
+			villager_info_panel.grab_focus.call_deferred()

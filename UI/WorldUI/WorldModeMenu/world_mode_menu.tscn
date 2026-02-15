@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm60k3x6x558o"]
+
+[ext_resource type="Script" uid="uid://c30nt4lrksfqc" path="res://UI/WorldUI/WorldModeMenu/world_mode_menu.gd" id="1_w3561"]
+
+[node name="WorldModeMenu" type="Control" node_paths=PackedStringArray("villagers_button_panel", "construction_button_panel", "world_stats_button_panel")]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("1_w3561")
+selected_color = Color(2.5027991e-06, 0.69789547, 0.9934078, 1)
+villagers_button_panel = NodePath("PanelContainer/HBoxContainer/VillagersButtonPanel")
+construction_button_panel = NodePath("PanelContainer/HBoxContainer/ConstructionButtonPanel")
+world_stats_button_panel = NodePath("PanelContainer/HBoxContainer/WorldButtonPanel")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 30.0
+offset_right = 20.0
+offset_bottom = 70.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VillagersButtonPanel" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/VillagersButtonPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VillagersButtonPanel/MarginContainer"]
+layout_mode = 2
+text = "Villagers"
+
+[node name="ConstructionButtonPanel" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer/ConstructionButtonPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/ConstructionButtonPanel/MarginContainer2"]
+layout_mode = 2
+text = "Construction"
+
+[node name="WorldButtonPanel" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/HBoxContainer/WorldButtonPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/WorldButtonPanel/MarginContainer3"]
+layout_mode = 2
+text = "World"

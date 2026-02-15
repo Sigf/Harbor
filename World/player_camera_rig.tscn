@@ -28,6 +28,8 @@ script = ExtResource("1_qgm1y")
 camera = NodePath("SpringArm3D/main_camera")
 spring_arm = NodePath("SpringArm3D")
 cursor_node = NodePath("Cursor")
+camera_min_distance = 10.0
+camera_max_distance = 35.0
 zoom_speed = 15.0
 smooth_speed = 8.0
 

@@ -30,4 +30,3 @@ func _on_cancel_job_button_pressed() -> void:
     assert(is_instance_valid(owning_villager))
     
     owning_villager.remove_job(target_job)
-    queue_free()
